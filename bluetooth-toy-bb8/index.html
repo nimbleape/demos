@@ -157,7 +157,7 @@ limitations under the License.
         </div> -->
       </div>
     </template>
-    <audio id="soundFile" class="hideIfNoApi" src="song.mp3"></audio>
+    <audio id="soundFile" class="hideIfNoApi" src="song.ogg"></audio>
     <button id="play-but">Play/Pause</button>
 
     <script>
@@ -361,10 +361,13 @@ limitations under the License.
           // 7 to TX Power and 1 to Wake CPU on radio service.
           if (controlCharacteristic == null) {
             navigator.bluetooth.requestDevice({
-              filters: [{
-                //services: ['22bb746f-2bb0-7554-2d6f-726568705327']
-                namePrefix: ['BB']
-              }]
+              'filters': [{
+                'namePrefix': ['BB']
+              }],
+              'optionalServices': [
+                '22bb746f-2bb0-7554-2d6f-726568705327',
+                '22bb746f-2ba0-7554-2d6f-726568705327'
+                ]
             })
             .then(device => {
               console.log('> Found ' + device.name);
